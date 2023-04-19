@@ -28,4 +28,7 @@ df.head(10)
 # đọc từ hàng 2 đến hàng 9
 df.loc[2:9]
 # ngoài ra có thể đọc số hàng tùy chọn mà ko cần phải đọc toàn bộ file, skiprows : bo qua 2 dong dau bat dau doc tu dong 3 voi so luong 7 dong
-df1=pd.read_excel("E:\\PTDL\\pandas\\sv_HUET.xlsx",skiprows=3,nrows=7)
+pd.read_excel("E:\\PTDL\\pandas\\sv_HUET.xlsx",skiprows=3,nrows=7)
+
+a=df.describe(include='all')
+print(a)
