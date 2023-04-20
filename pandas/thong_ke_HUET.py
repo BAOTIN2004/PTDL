@@ -29,6 +29,19 @@ df.head(10)
 df.loc[2:9]
 # ngoài ra có thể đọc số hàng tùy chọn mà ko cần phải đọc toàn bộ file, skiprows : bo qua 2 dong dau bat dau doc tu dong 3 voi so luong 7 dong
 pd.read_excel("E:\\PTDL\\pandas\\sv_HUET.xlsx",skiprows=3,nrows=7)
+# lấy phân vị 50%
+df.describe(include=np.number).T[['50%']]
+# giá trị xuất hiện nhiều nhất trong cột
+df.describe(include=[object]).T['top']
+# số lần xuất hiện của giá trị top
+df.describe(include=[object]).T['freq']
+# tính phân vị 25 >> sắp xếp tăng dần>> vị trí ceil(0.25*n)= vị trí nguyên nhỏ nhất lớn hơn 0.25*n
 
-a=df.describe(include='all')
+# phân tổ
+df['DTB C3']=pd.cut(df['Điểm TB lớp 12'],bins=3,labels=['<6.5','6.5-7.9','>=8.0'])
+df['Loại']=pd.qcut(df['Điểm TB lớp 12'],q=3,labels=['Trung bình','Khá','Giỏi'])
+a=df.groupby(['DTB C3','Loại']).size().unstack(fill_value=0)
 print(a)
+
+
+
