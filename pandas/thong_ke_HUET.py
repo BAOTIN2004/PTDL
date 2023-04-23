@@ -36,12 +36,19 @@ df.describe(include=[object]).T['top']
 # số lần xuất hiện của giá trị top
 df.describe(include=[object]).T['freq']
 # tính phân vị 25 >> sắp xếp tăng dần>> vị trí ceil(0.25*n)= vị trí nguyên nhỏ nhất lớn hơn 0.25*n
-
+# tính phân vị của cột thu nhập với phân vị 25%
+df['Thu nhập'].quantile(0.25)
 # phân tổ
-df['DTB C3']=pd.cut(df['Điểm TB lớp 12'],bins=3,labels=['<6.5','6.5-7.9','>=8.0'])
-df['Loại']=pd.qcut(df['Điểm TB lớp 12'],q=3,labels=['Trung bình','Khá','Giỏi'])
+df['DTB C3']=pd.qcut(df['Điểm TB lớp 12'],q=3,labels=['<6.5','6.5-7.9','>=8.0'])
+df['Loại']=pd.qcut(df['Điểm TB lớp 12'],q=3,labels=['TB','Khá','GIỎI'])
 a=df.groupby(['DTB C3','Loại']).size().unstack(fill_value=0)
-print(a)
+#print(a)
+import matplotlib.pyplot as plt
 
-
-
+# df.plot(kind='scatter', x='ĐTB toán lí hóa ', y='Điểm TB lớp 12')
+# plt.show()
+df['Thu nhập'].value_counts().sort_index().plot(kind='bar')
+plt.title('Biểu đồ thu nhập')
+plt.xlabel('Thu nhập')
+plt.ylabel('Số lượng')
+plt.show()
