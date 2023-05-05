@@ -1,4 +1,5 @@
-import pandas as pd, numpy as np,openpyxl
+import pandas as pd
+import numpy as np
 df = pd.read_excel("E:\\PTDL\\pandas\\sv_HUET.xlsx")
 
 # đếm số lần xuất hiện của các giá trị trong cột thứ 6
@@ -42,13 +43,19 @@ df['Thu nhập'].quantile(0.25)
 df['DTB C3']=pd.qcut(df['Điểm TB lớp 12'],q=3,labels=['<6.5','6.5-7.9','>=8.0'])
 df['Loại']=pd.qcut(df['Điểm TB lớp 12'],q=3,labels=['TB','Khá','GIỎI'])
 a=df.groupby(['DTB C3','Loại']).size().unstack(fill_value=0)
-#print(a)
+
 import matplotlib.pyplot as plt
 
-# df.plot(kind='scatter', x='ĐTB toán lí hóa ', y='Điểm TB lớp 12')
-# plt.show()
-df['Thu nhập'].value_counts().sort_index().plot(kind='bar')
-plt.title('Biểu đồ thu nhập')
-plt.xlabel('Thu nhập')
-plt.ylabel('Số lượng')
-plt.show()
+def do_thi():
+    df['Lớp'].value_counts().sort_index().plot(kind='bar')
+    plt.title('Biểu đồ tổng thu nhập từng lớp')
+    plt.xlabel('Thu nhập')
+    plt.ylabel('Số lượng')
+    plt.show()
+
+    df['Thu nhập'].value_counts().sort_index().plot(kind='bar').pcolor 
+    plt.title('Biểu đồ thu nhập')
+    plt.xlabel('Thu nhập')
+    plt.ylabel('Số lượng')
+    plt.show()
+
