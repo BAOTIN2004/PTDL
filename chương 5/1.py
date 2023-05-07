@@ -91,7 +91,7 @@ def bieu_do_cot_median():
 def alltime_top_ten():
    allTimeTopTen = data["job_title"].value_counts().nlargest(10).reset_index()
    sns.barplot(x=allTimeTopTen["job_title"], y=allTimeTopTen["index"])
-   plt.title("Tóp 10 công việc Data Scicence phổ biến nhất")
+   plt.title("Top 10 công việc Data Scicence phổ biến nhất")
    plt.xlabel("Count")
    plt.ylabel("Job Title")
    plt.show()
@@ -100,9 +100,10 @@ def alltime_top_ten_2023():
    topTen2023 = data[data["work_year"]==2023]["job_title"].value_counts().nlargest(10).reset_index()
    sns.barplot(x=topTen2023["job_title"], y=topTen2023["index"])
    plt.title("Tóp 10 công việc Data Scicence phổ biến nhất 2023")
-   plt.xlabel("Count")
-   plt.ylabel("Job Title")
+   plt.xlabel("Số lượng")
+   plt.ylabel("Tên cv")
    plt.show()
+alltime_top_ten_2023()
 
 def experience_level_vs_work_year():
     # Phân tích năm làm việc và mức độ kinh nghiệm bằng hàm pandas cross-tab
