@@ -25,7 +25,7 @@ def bieu_do_duong_luong_nam():
     plt.plot(years,df.values)
     plt.show()
 
-bieu_do_duong_luong_nam()
+
     
 def bieu_do_thanh_loai_cty():
     df=data['company_size'].value_counts()
@@ -99,11 +99,11 @@ def alltime_top_ten():
 def alltime_top_ten_2023():
    topTen2023 = data[data["work_year"]==2023]["job_title"].value_counts().nlargest(10).reset_index()
    sns.barplot(x=topTen2023["job_title"], y=topTen2023["index"])
-   plt.title("Tóp 10 công việc Data Scicence phổ biến nhất 2023")
+   plt.title("Top 10 công việc Data Scicence phổ biến nhất 2023")
    plt.xlabel("Số lượng")
    plt.ylabel("Tên cv")
    plt.show()
-alltime_top_ten_2023()
+
 
 def experience_level_vs_work_year():
     # Phân tích năm làm việc và mức độ kinh nghiệm bằng hàm pandas cross-tab
@@ -121,16 +121,16 @@ def bieu_do_remote_ratio():
    plt.title('Phân phối tỷ lệ từ xa')
    plt.show()
 
-
+def histogram():
 # Create histogram
-sns.histplot(x = 'salary_in_usd', hue = 'experience_level', multiple = 'stack',
-             edgecolor = '#cfd0d4', bins = 50, data = data, palette = 'viridis')
+   sns.histplot(x = 'salary_in_usd', hue = 'experience_level', multiple = 'stack',
+               edgecolor = '#cfd0d4', bins = 50, data = data, palette = 'viridis')
 
-# Customize the title and labels
-plt.grid(alpha = 0.3)
-plt.title('Distribution of Salary (USD) by Experience')
-plt.xlabel('Salary')
-plt.ylabel('Count')
+   # Customize the title and labels
+   plt.grid(alpha = 0.3)
+   plt.title('Distribution of Salary (USD) by Experience')
+   plt.xlabel('Salary')
+   plt.ylabel('Count')
 
-# Display the plot
-plt.show()
+   # Display the plot
+   plt.show()
