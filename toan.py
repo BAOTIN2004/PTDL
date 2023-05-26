@@ -5,7 +5,7 @@ x=data['employment_type']
 y=data['salary_in_usd']
 plt.xlabel('Hình thức làm việc')
 plt.ylabel('Lương')
-plt.scatter(x,y,c='red',s=20)
+plt.scatter(x,y,c='red',s=1)
 plt.title('Biểu đồ phân tán hình thức làm việc với lương')
 plt.show()
 
@@ -16,3 +16,8 @@ plt.ylabel('$')
 plt.title("Trung bình lương các năm")
 sns.lineplot(x=['2020', '2021', '2022', '2023'], y=meanYearlySalary)
 plt.show()
+
+# while left_index < len(left) and right_index < len(right):
+#         if left[left_index] < right[right_index]:
+#             merged.append(left[left_index])
+#             left_index += 1
