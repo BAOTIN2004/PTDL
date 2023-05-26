@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import statistics
-# Đọc dữ liệu từ file CSV
+# Đọc dữ liệu từ file 
 data=pd.read_excel('E:\\data\\PTDL\\ds_salaries.xlsx')
 
 # Lấy cột dữ liệu cần tính phương sai
