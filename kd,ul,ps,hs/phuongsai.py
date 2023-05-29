@@ -5,7 +5,7 @@ import statistics
 data=pd.read_excel('E:\\data\\PTDL\\ds_salaries.xlsx')
 
 # Lấy cột dữ liệu cần tính phương sai
-column_data = data['salary']
+column_data = data['salary_in_usd']
 
 # Chuyển đổi dữ liệu thành mảng numpy
 array_data = np.array(column_data)
