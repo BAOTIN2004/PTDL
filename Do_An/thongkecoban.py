@@ -1,4 +1,5 @@
 import pandas as pd
+
 # đọc dữ liệu từ file excel
 data=pd.read_excel("E:\data\PTDL\ds_salaries.xlsx")
 
@@ -37,3 +38,4 @@ bins=[40000,80000,120000,200000,280000,350000,450000]
 labels=['40000-80000','80000-120000','120000-200000','200000-280000','280000-350000','350000-450000']
 data['Khoang_Luong'] = pd.cut(data['salary_in_usd'], bins=bins, labels=labels, include_lowest=True)
 luong_counts = data['Khoang_Luong'].value_counts()
+
