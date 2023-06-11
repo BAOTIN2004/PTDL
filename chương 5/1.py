@@ -13,11 +13,11 @@ data = pd.read_excel("E:\data\PTDL\ds_salaries.xlsx")
 def bieu_do_tron_loai_cv():
     df=data['company_size'].value_counts()
     lable=df.index.tolist()
-    my_colors= ['green','red','silver','lightblue']
+    my_colors= ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99', '#c2c2f0']
     plt.pie(df,labels=lable,autopct='%1.1f%%',colors=my_colors)
-    plt.title('Biểu đồ loại công ty')
+    plt.title('Tỉ lệ mỗi loại công ty')
     plt.show()
-bieu_do_tron_loai_cv()
+
 def bieu_do_duong_luong_nam():
     df=data.groupby(['work_year'])['salary_in_usd'].mean()
     years = df.index.tolist()
@@ -75,25 +75,29 @@ def bieu_do_tron_experience_level():
    
 def bieu_do_duong_mean():
    meanYearlySalary = np.array(data['salary_in_usd'].groupby(data['work_year']).mean())
-   plt.xlabel('Year')
-   plt.ylabel('Mean Salary')
+   plt.xlabel('Năm')
+   plt.ylabel('Lương trung bình($)')
    plt.title("Giá trị trung bình mức lương USD qua các năm")
    sns.lineplot(x=['2020', '2021', '2022', '2023'], y=meanYearlySalary)
    plt.show()
 
+
 def bieu_do_cot_median():
+   
    data.groupby('work_year')['salary_in_usd'].median().plot.bar()
-   plt.xlabel('Year')
-   plt.ylabel('Median Salary')
+   plt.xlabel('Năm')
+   plt.ylabel('Giá trị tung vị của lương')
    plt.title('Giá trị trung vị mức lương USD qua các năm ')
+
    plt.show()
+
 
 def alltime_top_ten():
    allTimeTopTen = data["job_title"].value_counts().nlargest(10).reset_index()
    sns.barplot(x=allTimeTopTen["job_title"], y=allTimeTopTen["index"])
    plt.title("Top 10 công việc Data Scicence phổ biến nhất")
-   plt.xlabel("Count")
-   plt.ylabel("Job Title")
+   plt.xlabel("Số lượng")
+   plt.ylabel("Ngành")
    plt.show()
 
 def alltime_top_ten_2023():
@@ -125,12 +129,46 @@ def histogram():
 # Create histogram
    sns.histplot(x = 'salary_in_usd', hue = 'experience_level', multiple = 'stack',
                edgecolor = '#cfd0d4', bins = 50, data = data, palette = 'viridis')
-
    # Customize the title and labels
    plt.grid(alpha = 0.3)
-   plt.title('Distribution of Salary (USD) by Experience')
-   plt.xlabel('Salary')
-   plt.ylabel('Count')
-
+   plt.title('Phân phối tiền lương theo kinh nghiệm qua các năm')
+   plt.xlabel('Lương($)')
+   plt.ylabel('Số lượng')
    # Display the plot
    plt.show()
+
+def tuong_quang_experience_level_company_size():
+   # Tạo một bảng chéo của hai cột
+    cross_tab = pd.crosstab(data['experience_level'], data['company_size'])
+    # Tạo một bản đồ nhiệt bằng cách sử dụng dữ liệu bảng chéo
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(cross_tab, annot=True, fmt="d", cmap='Blues')
+    plt.xlabel('Quy mô công ')
+    plt.ylabel('Kinh nghiệm')
+    plt.title('Mối quan hệ giữa Cấp độ kinh nghiệm và Quy mô công ty')
+    plt.show()
+ft_sample = data[data['employment_type'] == 'FT']['salary_in_usd']
+
+from scipy.stats import norm
+# Kích thước mẫu
+n_ft = 3000
+
+# Tính giá trị trung bình mẫu và độ lệch chuẩn mẫu cho FT
+mean_ft = ft_sample.mean()
+std_ft = ft_sample.std(ddof=1)
+
+# Nhập giá trị tin cậy từ người dùng
+confidence_level = float(input("Nhập giá trị tin cậy (từ 0 đến 1): "))
+
+# Giá trị z-score tương ứng với confidence level
+z_score_ft = norm.ppf((1 + confidence_level) / 2)
+
+# Tính khoảng tin cậy
+margin_of_error_ft = z_score_ft * std_ft / np.sqrt(n_ft)
+
+# ước luoejng khoảng lương trung bình cho loại hình công việc Full time
+confidence_interval_ft = (mean_ft - margin_of_error_ft, mean_ft + margin_of_error_ft)
+
+# In kết quả
+print("Khoảng tin cậy của giá trị trung bình cho hình thức làm việc toàn thời gian:")
+print(confidence_interval_ft)

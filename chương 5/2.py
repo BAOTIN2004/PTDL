@@ -19,3 +19,6 @@ def bieu_do_phan_to():
 work_year=data['work_year'].unique()
 work_year_df={'Năm':work_year }
 print(work_year_df)
+
+a=data['experience_level'].value_counts()
+print(a)
