@@ -11,7 +11,7 @@ salary_DE=data[data['job_title']=='Data Engineer']['salary_in_usd']
 
 # Kiểm định t
 t_statistic, p_value = stats.ttest_ind(salary_DA,salary_DE)
-
+# print(t_statistic)
 # Kiểm tra kết quả
 alpha = 0.05  # Mức ý nghĩa
 if p_value < alpha:
